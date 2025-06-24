@@ -1,44 +1,72 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { RouterLink } from 'vue-router'
+import { RouterLink, useRoute } from 'vue-router'
+import { User, Home, BookOpen, Wallet } from 'lucide-vue-next'
 
 const userName = ref('Donyorov Nizomiddin');
 const email = ref('example@gmail.com');
+const route = useRoute();
 </script>
 
 <template>
   <div class="flex h-screen bg-gray-100 text-gray-800">
-      <!-- Sidebar -->
+    <!-- Sidebar -->
     <aside class="w-64 bg-gradient-to-b from-[#98B4F3] to-[#BFD5FF] text-white flex flex-col p-4">
-      <h1 class="text-2xl font-bold mb-6">Lime Academy</h1>
+      <h1 class="text-[30px] text-black mt-6 font-bold">Lime Academy</h1>
 
-      <nav class="space-y-2 font-medium">
-         <RouterLink to="/home" class="block hover:bg-gray-700 p-2 rounded">Профиль</RouterLink>
-         <RouterLink to="/profile" class="block hover:bg-gray-700 p-2 rounded">Главный</RouterLink>
-         <RouterLink to="/courses" class="block hover:bg-gray-700 p-2 rounded">Курсы</RouterLink>
-         <RouterLink to="/balance" class="block hover:bg-gray-700 p-2 rounded">Баланс</RouterLink>
+      <nav class="space-y-2 font-medium py-7">
+        <RouterLink to="/profile"
+          class="flex items-center gap-3 px-7 py-2 rounded-[16px] transition-all duration-300 ease-in-out hover:bg-gray-700/80"
+          :class="{ 'bg-black text-white': route.path === '/profile' }">
+          <Home class="w-5 h-5" /> Главный
+        </RouterLink>
+
+        <RouterLink to="/home"
+          class="flex items-center gap-3 px-7 py-2 rounded-[16px] transition-all duration-300 ease-in-out hover:bg-gray-700/80"
+          :class="{ 'bg-black text-white': route.path === '/home' }">
+          <User class="w-5 h-5" /> Профиль
+        </RouterLink>
+
+        <RouterLink to="/courses"
+          class="flex items-center gap-3 px-7 py-2 rounded-[16px] transition-all duration-300 ease-in-out hover:bg-gray-700/80"
+          :class="{ 'bg-black text-white': route.path === '/courses' }">
+          <BookOpen class="w-5 h-5" /> Курсы
+        </RouterLink>
+
+        <RouterLink to="/balance"
+          class="flex items-center gap-3 px-7 py-2 rounded-[16px] transition-all duration-300 ease-in-out hover:bg-gray-700/80"
+          :class="{ 'bg-black text-white': route.path === '/balance' }">
+          <Wallet class="w-5 h-5" /> Баланс
+        </RouterLink>
       </nav>
 
-      <div class="mt-10">
+
+      <hr class="text-[#1E1E1E80]">
+
+
+      <div class="py-4">
         <p class="text-sm font-semibold mb-2">Сообщество</p>
         <ul class="text-sm space-y-1">
-          <li>Соревнования</li>
-          <li>Статьи</li>
-          <li>Партнеры</li>
+          <li class="text-base">Соревнования</li>
+          <li class="text-base">Статьи</li>
+          <li class="text-base">Партнеры</li>
         </ul>
       </div>
+
+      <hr class="text-[#1E1E1E80]">
+
 
       <div class="mt-6">
         <p class="text-sm font-semibold mb-2">Сервисы</p>
         <ul class="text-sm space-y-1">
-          <li>Онлайн школа</li>
-          <li>P2P Market</li>
-          <li>Маркетплейс</li>
-          <li>Рекламный кабинет</li>
+          <li class="text-base">Онлайн школа</li>
+          <li class="text-base">P2P Market</li>
+          <li class="text-base">Маркетплейс</li>
+          <li class="text-base">Рекламный кабинет</li>
         </ul>
       </div>
     </aside>
-  
+
 
     <!-- Main Content -->
     <div class="flex-1 flex flex-col">
@@ -51,7 +79,7 @@ const email = ref('example@gmail.com');
         </div>
       </header>
 
-    <RouterView />
+      <RouterView />
 
     </div>
   </div>
