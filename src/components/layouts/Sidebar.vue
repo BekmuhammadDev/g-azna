@@ -8,8 +8,8 @@ const navGroups = [
     {
         title: null, // asosiy menyu
         items: [
-            { label: 'Главный', to: '/profile', icon: Home },
-            { label: 'Профиль', to: '/home', icon: User },
+            { label: 'Главный', to: '/home', icon: Home },
+            { label: 'Профиль', to: '/profile', icon: User },
             { label: 'Курсы', to: '/courses', icon: BookOpen },
             { label: 'Баланс', to: '/balance', icon: Wallet },
         ]
