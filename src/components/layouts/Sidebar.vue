@@ -40,9 +40,8 @@ const navGroups = [
         <h1 class="text-[30px] text-black mt-6 font-bold">Lime Academy</h1>
         <nav class="space-y-2 font-medium py-7">
             <template v-for="(group, groupIndex) in navGroups" :key="groupIndex">
-                <!-- Optional group title -->
                 <div v-if="group.title" class="mt-6">
-                    <hr class="text-[#1E1E1E80] mb-2" />
+                    <hr class="border-black mb-2" />
                     <p class="text-sm font-semibold px-7 mb-2">{{ group.title }}</p>
                 </div>
 
