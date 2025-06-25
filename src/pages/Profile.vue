@@ -3,14 +3,10 @@ import { SignalMedium } from 'lucide-vue-next';
 import blackChart from "@/assets/img/blackchart.png"
 import brownChart from "@/assets/img/brownchart.png"
 import {
-    Facebook,
     Instagram,
     Youtube,
-    Send, // Telegram uchun
-    Music2, // TikTok o‘rnida
-    Heart
+    Music2,
 } from 'lucide-vue-next'
-import { HeartIcon } from '@heroicons/vue/24/solid'
 import { ref } from 'vue'
 
 const isLiked = ref(false)
@@ -18,7 +14,6 @@ const isLiked = ref(false)
 const toggleLike = () => {
     isLiked.value = !isLiked.value
 }
-
 const oldPassword = ref('')
 const newPassword = ref('')
 
@@ -39,10 +34,8 @@ const handleSubmit = () => {
 </script>
 
 <template>
-    <!-- Main Section -->
     <main class="p-6 overflow-auto space-y-6">
         <div class="flex gap-8">
-            <!-- About Section -->
             <div class="bg-gradient-to-b  from-[#8798C5] to-[#8597C4] h-3/4 text-white p-6 rounded-xl shadow">
                 <h2 class="text-[32px] text-center font-normal mb-2">О нас</h2>
                 <p class="text-[32px] text-center font-normal leading-[1.1]">
@@ -56,7 +49,6 @@ const handleSubmit = () => {
                 </div>
             </div>
 
-            <!-- Balance div -->
             <div class="flex gap-6 w-full ">
                 <div class="bg-white p-4 shadow-md  rounded-xl ">
                     <p class="text-center mb-3 font-bold text-[#A9A9A9]">Ваш баланс</p>
@@ -69,12 +61,9 @@ const handleSubmit = () => {
                     <div class="flex justify-center mt-5">
                         <div class="flex items-center gap-2  px-4 py-2 rounded-full cursor-pointer"
                             @click="toggleDropdown">
-                            <!-- Dumaloq rasm -->
                             <img src="https://picsum.photos/id/1/200/300" alt="Lime logo"
                                 class="w-6 h-6 rounded-full object-cover" />
-                            <!-- Matn -->
                             <span class="font-medium">Lime/LIME</span>
-                            <!-- Arrow -->
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform duration-200"
                                 :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                                 stroke-width="2">
@@ -157,24 +146,20 @@ const handleSubmit = () => {
                 </div>
 
                 <div class="flex gap-4 mt-10 items-center">
-                    <a href="https://facebook.com" target="_blank" class="bg-gray-100 p-2 rounded-full  transition">
-                        <Facebook class="w-5 h-5 text-[#8798C5]" />
+                    <a href="https://facebook.com" target="_blank">
+                        <i class="bi bi-facebook text-white" style="font-size: 24px;"></i>
                     </a>
-
                     <a href="https://instagram.com" target="_blank" class="transition">
                         <Instagram class="w-7 h-7 text-white" />
                     </a>
-
                     <a href="https://tiktok.com" target="_blank" class=" transition">
                         <Music2 stroke-width="4" class="w-7 h-7 text-white" />
                     </a>
-
                     <a href="https://youtube.com" target="_blank" class=" transition">
                         <Youtube class="w-7 h-7 text-white" />
                     </a>
-
-                    <a href="https://t.me/yourchannel" target="_blank" class="bg-white rounded-full p-2 transition">
-                        <Send class="w-4 h-4 text-gray-600" />
+                    <a href="https://t.me/yourchannel" target="_blank">
+                        <i class="bi bi-telegram text-white" style="font-size: 24px;"></i>
                     </a>
                 </div>
             </div>
@@ -183,7 +168,7 @@ const handleSubmit = () => {
                 <div class="flex items-center mb-3 justify-between">
                     <h1 class="text-[32px] font-bold text-white">Профиль</h1>
                     <div class="relative left-14 cursor-pointer" @click="toggleLike">
-                        <Heart :color="isLiked ? 'red' : 'white'" />
+                        <span><i class="bi bi-heart-fill text-red-500" style="font-size: 24px;"></i></span>
                     </div>
                 </div>
                 <div class="flex items-center gap-4">
@@ -214,8 +199,5 @@ const handleSubmit = () => {
                 </div>
             </div>
         </div>
-
-        <!-- Password Change -->
-
     </main>
 </template>

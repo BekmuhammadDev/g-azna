@@ -37,7 +37,7 @@ const navGroups = [
 
 <template>
     <aside class="w-64 bg-gradient-to-b from-[#AECAEC] to-[#8697C5] text-white flex flex-col p-4">
-        <h1 class="text-[30px] text-black mt-6 font-bold">Lime Academy</h1>
+        <h1 class="text-[30px] text-black  font-bold">Lime Academy</h1>
         <nav class="space-y-2 font-medium py-7">
             <template v-for="(group, groupIndex) in navGroups" :key="groupIndex">
                 <div v-if="group.title" class="mt-6">
