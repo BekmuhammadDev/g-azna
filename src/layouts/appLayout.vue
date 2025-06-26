@@ -5,19 +5,12 @@ import Header from '@/components/layouts/Header.vue';
 
 <template>
   <div class="flex h-screen bg-gray-100 text-gray-800">
-    <!-- Sidebar -->
      <Sidebar/>
-    <!--------->
-
-    <!-- Main Content -->
     <div class="flex-1 flex flex-col">
-      <!-- Header -->
        <Header/>
-      <!-- Header -->
-      <RouterView />
+      <div class="overflow-auto">
+        <RouterView />
+      </div>
     </div>
   </div>
 </template>
-
-<style scoped>
-</style>
