@@ -85,7 +85,7 @@ const props = withDefaults(defineProps<Props>(), {
 const variants: Record<TButtonVariants, string> = {
   primary: "bg-green !text-white hover:bg-green/90 hover:!text-white",
   secondary: "bg-gray-800 text-gray! hover:bg-gray-900",
-  info: "bg-gray text-dark! hover:bg-gray-100/20 hover:text-dark!",
+  info: "bg-white hover:bg-gray-100/20 ",
   error: "bg-red-500/10 text-red-500! hover:bg-red-500/20",
   success: "bg-[#0DB23B] text-white! hover:bg-primary/90 hover:text-white!",
   warning: "bg-red text-white! hover:bg-red/90",
@@ -96,7 +96,7 @@ const variants: Record<TButtonVariants, string> = {
 const variantTexts: Record<TButtonVariants, string> = {
   primary: "text-white font-semibold text-sm",
   secondary: "text-gray font-semibold text-sm",
-  info: "text-dark font-semibold text-sm",
+  info: "text-[20px] !font-normal text-green",
   error: "text-red-500 font-semibold text-sm",
   success: "text-white font-semibold text-sm",
   warning: "text-white font-semibold text-sm",

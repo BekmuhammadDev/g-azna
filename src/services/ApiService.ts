@@ -1,8 +1,8 @@
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { App } from "vue";
+import axios, {AxiosInstance, AxiosRequestConfig, AxiosResponse} from "axios";
+import {App} from "vue";
 import VueAxios from "vue-axios";
 
-import { JwtService } from "@/services/JwtService";
+import {JwtService} from "@/services/JwtService";
 import router from "@/router";
 
 class ApiService {
@@ -22,12 +22,12 @@ class ApiService {
             const refresh = JwtService.getRefresh();
             if (!refresh) {
                 JwtService.destroyAccess();
-                return router.push({ name: "PAuth" });
+                return router.push({name: "PAuth"});
             }
 
             axios
                 .post<{ access: string }, { data: any }>(
-                    import.meta.env.VITE_APP_BASE_URL + "auth/refresh",
+                    import.meta.env.VITE_APP_BASE_URL + "auth/token/refresh",
                     {}, // Body bo'sh bo'ladi
                     {
                         headers: {
@@ -36,7 +36,7 @@ class ApiService {
                         },
                     }
                 )
-                .then(({ data }) => {
+                .then(({data}) => {
                     JwtService.saveToken(data.access);
                     ApiService.setHeader();
                     resolve(data.access);
@@ -47,7 +47,7 @@ class ApiService {
                     localStorage.removeItem("id_token");
                     JwtService.destroyAccess();
                     JwtService.destroyRefresh();
-                    await router.push({ name: "PAuth" });
+                    await router.push({name: "PAuth"});
                     reject(error);
                 });
         });
@@ -67,7 +67,7 @@ class ApiService {
                     if (isRefresh) {
                         JwtService.destroyAccess();
                         JwtService.destroyRefresh();
-                        await router.push({ name: "PAuth" });
+                        await router.push({name: "PAuth"});
                         return;
                     }
 
@@ -85,7 +85,7 @@ class ApiService {
                 }
 
                 if (errorResponse?.status === 404) {
-                    await router.replace({ name: "404" });
+                    await router.replace({name: "404"});
                 }
 
                 return Promise.reject(error);
@@ -95,11 +95,11 @@ class ApiService {
 
     public static setHeader(): void {
         ApiService.vueInstance.axios.defaults.headers.common["Authorization"] =
-            JwtService.getToken() ? `Bearer ${JwtService.getToken()}` : undefined;
-        ApiService.vueInstance.axios.defaults.headers.common["Accept-Language"] =
-            localStorage.getItem("locale") || "ru";
-        ApiService.vueInstance.axios.defaults.headers.common["Content-Type"] =
-            "application/json";
+            JwtService.getToken() ? `Basic ${JwtService.getToken()}` : undefined;
+        // ApiService.vueInstance.axios.defaults.headers.common["Accept-Language"] =
+        //     localStorage.getItem("locale") || "ru";
+        // ApiService.vueInstance.axios.defaults.headers.common["Content-Type"] =
+        //     "application/json";
     }
 
     public static unsetHeader(): void {
@@ -112,7 +112,7 @@ class ApiService {
     ): Promise<AxiosResponse<T>> {
         return ApiService.vueInstance.axios.get(resource, {
             ...params,
-            headers: { "Content-Type": "application/json" },
+            headers: {"Content-Type": "application/json"},
         });
     }
 
@@ -135,7 +135,7 @@ class ApiService {
     ): Promise<AxiosResponse<R>> {
         return ApiService.vueInstance.axios.post(`${resource}`, data, {
             ...params,
-            headers: { "Content-Type": "application/json", ...params?.headers },
+            headers: {"Content-Type": "application/json", ...params?.headers},
         });
     }
 
@@ -147,7 +147,7 @@ class ApiService {
     ): Promise<AxiosResponse<R>> {
         return ApiService.vueInstance.axios.put(`${resource}/${slug}`, data, {
             ...params,
-            headers: { "Content-Type": "application/json", ...params?.headers },
+            headers: {"Content-Type": "application/json", ...params?.headers},
         });
     }
 
@@ -158,7 +158,7 @@ class ApiService {
     ): Promise<AxiosResponse<R>> {
         return ApiService.vueInstance.axios.put(`${resource}`, data, {
             ...params,
-            headers: { "Content-Type": "application/json", ...params?.headers },
+            headers: {"Content-Type": "application/json", ...params?.headers},
         });
     }
 
@@ -169,7 +169,7 @@ class ApiService {
     ): Promise<AxiosResponse<R>> {
         return ApiService.vueInstance.axios.patch(`${resource}`, data, {
             ...params,
-            headers: { "Content-Type": "application/json", ...params?.headers },
+            headers: {"Content-Type": "application/json", ...params?.headers},
         });
     }
 
@@ -179,7 +179,7 @@ class ApiService {
     ): Promise<AxiosResponse> {
         return ApiService.vueInstance.axios.delete(`${resource}`, {
             params,
-            headers: { "Content-Type": "application/json" },
+            headers: {"Content-Type": "application/json"},
         });
     }
 }

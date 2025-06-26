@@ -7,17 +7,19 @@
 
         <p class="text-lg mt-2 text-gray">
           Akkaunt yuqmi?
-          <router-link to="/register" class="text-green-600 text-[16px] underline">Promocode orqali ro`yxatdan
+          <router-link to="/register" class="text-green-600 text-[16px] underline">Partner id orqali ro`yxatdan
             o`tish
           </router-link>
         </p>
 
-        <form @submit.prevent="handleLogin" class="space-y-8 mt-10 w-full">
+        <div class="space-y-8 mt-10 w-full">
           <FGroup label-class="text-gray font-medium text-base leading-5" label="E-mail">
-            <FInput placeholder="E-mail kiriting..."/>
+            <FInput placeholder="E-mail kiriting..." v-model="form.values.login"
+                    :error="form.$v.value.login?.$error || isError"/>
           </FGroup>
           <FGroup label-class="text-gray font-medium text-base leading-5" label="Parol">
-            <FInputPassword placeholder="Parol kiriting..."/>
+            <FInputPassword placeholder="Parol kiriting..." v-model="form.values.password"
+                            :error="form.$v.value.password?.$error || isError"/>
           </FGroup>
           <div class="flex items-center justify-between text-sm">
             <label>
@@ -28,19 +30,13 @@
           </div>
           <CButton
               variant="primary"
-              :disabled="disabled"
               :loading="loading"
               text="Kirish"
               class="w-full"
               type="submit"
-              @click="onSubmit"
+              @click="submit"
           />
-          <div class="text-center text-sm text-gray-500">yoki</div>
-          <button type="button" class="w-full py-2 border flex items-center justify-center gap-2 rounded">
-            <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" class="h-5"/>
-            Google bilan davom eting
-          </button>
-        </form>
+        </div>
       </div>
     </div>
 
@@ -66,17 +62,66 @@
   </div>
 </template>
 <script lang="ts" setup>
+import {useForm} from "@/composables/useForm";
+import {required} from "@vuelidate/validators";
 import CButton from "@/components/Common/CButton.vue";
 import {ref} from 'vue';
 import FGroup from "@/components/Form/FGroup.vue";
 import FInputPassword from "@/components/Form/Input/FInputPassword.vue";
 import FInput from "@/components/Form/Input/FInput.vue";
+import {useAuthStore} from "@/store/auth";
+import {useCustomToast} from "@/composables/useCustomToast";
+import apiService from "@/services/ApiService";
+import {useRouter} from "vue-router";
 
-const email = ref('');
-const password = ref('');
+const {showToast} = useCustomToast();
+
 const rememberMe = ref(false);
+const loading = ref(false)
+const isError = ref(false)
+const store = useAuthStore();
+const router = useRouter();
+// const handleLogin = () => {
+//   console.log({email: email.value, password: password.value, rememberMe: rememberMe.value});
+// };
+const form = useForm(
+    {
+      login: "",
+      password: "",
+    },
+    {
+      login: {
+        required,
+      },
+      password: {
+        required,
+      },
+    }
+);
 
-const handleLogin = () => {
-  console.log({email: email.value, password: password.value, rememberMe: rememberMe.value});
-};
+async function submit() {
+  form.$v.value.$touch();
+
+  if (!form.$v.value.$invalid) {
+    isError.value = false;
+    try {
+      loading.value = true;
+      await store.login(form.values);
+      apiService.setHeader();
+      await store.fetchUserData();
+      await router.push("/");
+    } catch (err) {
+
+      isError.value = true;
+      showToast(
+          err?.response?.data?.[0]?.error?.message ||
+          err?.response?.data?.errors[0]?.message ||
+          'username va parol mos kelamadi',
+          "error"
+      );
+    } finally {
+      loading.value = false;
+    }
+  }
+}
 </script>
