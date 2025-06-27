@@ -5,8 +5,9 @@ import {
     ILoginPostData,
     ILoginResponse,
     IRequestOtpResponse,
+    IRgisterationPostData,
     IUser,
-    IVerifyOtpPostData,
+    IVerifyOtpPostData
 } from "@/types/auth";
 import {JwtService} from "@/services/JwtService";
 
@@ -39,14 +40,60 @@ export const useAuthStore = defineStore("authStore", {
                     });
             });
         },
-        verifyOtp(otp: string) {
+        register(params: IRgisterationPostData) {
+            return new Promise((resolve, reject) => {
+                const requestBody: any = {
+                    email: params.email,
+                    login: params.login,
+                    first_name: params.first_name,
+                    last_name: params.last_name,
+                    password: params.password,
+                    promocode: params.promocode,
+                    confirm_password: params.confirm_password,
+                };
+
+                // Agar jshshir bo‘lsa, qo‘shiladi
+                if (params.jshshir) {
+                    requestBody.jshshir = params.jshshir;
+                }
+                if (params.jshshir) {
+                    requestBody.seriya_number = params.seriya_number;
+                }
+                apiService
+                    .post<IRgisterationPostData, ILoginResponse>(`/auth/register/?invite=${params.invite}`, requestBody)
+                    .then((res) => {
+                        console.log(res?.data)
+                        JwtService.saveId(res?.data?.data?.user?.user_id);
+                        JwtService.saveToken(res?.data?.data?.id_token);
+                        JwtService.saveRefreshToken(res?.data?.data?.refresh_token);
+                        resolve(res);
+                    })
+                    .catch((err) => {
+                        reject(err);
+                    });
+            });
+        },
+        verifyOtp(otp: { email: string, code: string }) {
             return new Promise((resolve, reject) => {
                 apiService
-                    .post<IVerifyOtpPostData>("auth/LoginConfirm/", {
-                        phone: this.loginResponse.phone_number,
-                        code: otp,
-                        type_: "backoffice_login_sms_verification",
-                        session: this.loginResponse?.session,
+                    .post<IVerifyOtpPostData>("/auth/verify/email/", {
+                        email: otp.email,
+                        code: otp.code
+                    })
+                    .then((res) => {
+                        resolve(res);
+                    })
+                    .catch((err) => {
+                        reject(err);
+                    });
+            });
+
+        },
+        getOtpCode(email: sring) {
+            return new Promise((resolve, reject) => {
+                apiService
+                    .post<any>("/auth/send/email/", {
+                        email: email,
                     })
                     .then((res) => {
                         resolve(res);

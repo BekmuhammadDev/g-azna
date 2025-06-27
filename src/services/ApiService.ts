@@ -22,7 +22,7 @@ class ApiService {
             const refresh = JwtService.getRefresh();
             if (!refresh) {
                 JwtService.destroyAccess();
-                return router.push({name: "PAuth"});
+                return router.push("/login");
             }
 
             axios
@@ -32,7 +32,7 @@ class ApiService {
                     {
                         headers: {
                             "Content-Type": "application/json",
-                            Authorization: `Refresh ${refresh}`, // Refresh token headerda yuboriladi
+                            Authorization: `Bearer ${refresh}`, // Refresh token headerda yuboriladi
                         },
                     }
                 )
@@ -47,7 +47,7 @@ class ApiService {
                     localStorage.removeItem("id_token");
                     JwtService.destroyAccess();
                     JwtService.destroyRefresh();
-                    await router.push({name: "PAuth"});
+                    await router.push("/login");
                     reject(error);
                 });
         });
@@ -95,11 +95,11 @@ class ApiService {
 
     public static setHeader(): void {
         ApiService.vueInstance.axios.defaults.headers.common["Authorization"] =
-            JwtService.getToken() ? `Basic ${JwtService.getToken()}` : undefined;
+            JwtService.getToken() ? `Bearer ${JwtService.getToken()}` : undefined;
         // ApiService.vueInstance.axios.defaults.headers.common["Accept-Language"] =
         //     localStorage.getItem("locale") || "ru";
-        // ApiService.vueInstance.axios.defaults.headers.common["Content-Type"] =
-        //     "application/json";
+        ApiService.vueInstance.axios.defaults.headers.common["Content-Type"] =
+            "application/json";
     }
 
     public static unsetHeader(): void {
@@ -123,7 +123,6 @@ class ApiService {
         return ApiService.vueInstance.axios.get(`${resource}/${slug}`, {
             headers: {
                 "Content-Type": "application/json",
-                "ngrok-skip-browser-warning": "true",
             },
         });
     }

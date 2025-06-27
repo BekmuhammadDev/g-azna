@@ -3,6 +3,19 @@ export interface ILoginPostData {
     password: string;
 }
 
+export interface IRgisterationPostData {
+    email: string,
+    login: string,
+    jshshir?: string,
+    seriya_number?: string,
+    first_name: string,
+    last_name: string,
+    password: string,
+    promocode: string,
+    invite?: string,
+    confirm_password: string
+}
+
 export interface ILoginResponse {
     phone_number: string;
     session: string;
@@ -21,10 +34,8 @@ export interface IRequestOtpResponse {
 }
 
 export interface IVerifyOtpPostData {
-    phone: string;
+    email: string;
     code: string;
-    type_: string;
-    session: string;
 }
 
 export interface IVerifyOtpResponse {

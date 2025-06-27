@@ -26,7 +26,7 @@
               <input type="checkbox" v-model="rememberMe"/>
               Eslab qolish
             </label>
-            <a href="/forgot" class="text-green-600 underline">Parolni unutdingizmi?</a>
+            <router-link to="/verify" class="text-green-600 underline">Parolni unutdingizmi?</router-link>
           </div>
           <CButton
               variant="primary"
