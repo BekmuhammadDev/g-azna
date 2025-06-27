@@ -67,7 +67,7 @@ const variants: Record<TButtonVariants, string> = {
   warning: "bg-red text-white! hover:bg-red/90",
   missing: "bg-primary-100! text-white! hover:bg-primary/90 hover:text-white!",
   yellow: "bg-yellow-100 text-yellow! hover:bg-yellow/20",
-   gray: "bg-[#D9D9D980] text-black",
+   gray: "bg-[#FFFFFFBF] text-black",
 };
 
 const variantTexts: Record<TButtonVariants, string> = {

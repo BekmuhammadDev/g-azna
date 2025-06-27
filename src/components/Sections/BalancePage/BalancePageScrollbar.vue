@@ -60,6 +60,7 @@ const transactions = [
         amount: '-300000 сум',
         type: 'negative',
     },
+   
 
 ];
 </script>
@@ -67,25 +68,19 @@ const transactions = [
 <template>
 
     <div class="w-[600px] p-4">
-        <div class="flex justify-end mb-2">
-            <button class="text-black font-medium">Выбрать число ▾</button>
-        </div>
-
-        <div
-            class="bg-gradient-to-b from-[#1d442f] to-[#85b0a1] rounded-xl shadow-lg w-[400px] h-[400px] overflow-auto divide-y divide-white/10">
+        <div class="bg-gradient-to-b from-[#1b3b2b] via-[#285d44] to-[#90b9a7] rounded-xl shadow-lg w-[400px] h-[400px] overflow-auto divide-y divide-white/10">
             <div class="max-h-[400px] overflow-y-auto">
                 <div v-for="(item, i) in transactions" :key="i"
                     class="flex items-center justify-between p-4 text-white hover:bg-white/10 transition">
                     <div class="flex items-center gap-3">
-                        <div class="h-8 w-8 rounded-full bg-white/70"></div>
+                        <div class="h-10 w-10 rounded-full bg-white"></div>
                         <div>
-                            <p class="text-sm font-medium">{{ item.title }}</p>
-                            <p class="text-xs text-white/80">{{ item.date }}</p>
+                            <p class="text-sm font-semibold mb-2">{{ item.title }}</p>
+                            <p class="text-[11px] font-extrabold text-white/80">{{ item.date }}</p>
                         </div>
                     </div>
                     <div :class="[
                         'text-sm font-semibold whitespace-nowrap',
-                        item.type === 'positive' ? 'text-green-300' : 'text-red-300',
                     ]">
                         {{ item.amount }}
                     </div>

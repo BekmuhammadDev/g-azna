@@ -31,7 +31,7 @@ const isBalance = computed(() => route.path === '/balance');
 </script>
 
 <template>
-    <div class="bg-gradient-to-r  from-[#305845] to-[#90b9a7] p-6 rounded-xl justify-between  flex w-full ">
+    <div class="bg-gradient-to-b  from-[#1C4532] to-[#90b9a7] p-6 rounded-xl justify-between  flex w-full ">
 
         <div v-if="!isBalance">
             <div class="w-[400px] mt-10">
@@ -70,10 +70,10 @@ const isBalance = computed(() => route.path === '/balance');
         </div>
 
         <div v-if="isBalance">
-            <select name="" id="" class=" p-1 rounded-md">
+            <!-- <select name="" id="" class=" p-1 rounded-md">
                 <option value="">Ru</option>
                 <option value="">Uz</option>
-            </select>
+            </select> -->
         </div>
 
         <div>
@@ -112,9 +112,9 @@ const isBalance = computed(() => route.path === '/balance');
                 </div>
             </div>
 
-            <div v-if="isBalance" class="flex justify-center mt-36 gap-4">
-                <CButton variant="gray" text="Ссылка" class="w-[120px]" />
-                <CButton variant="gray" text="Ещё" class="w-[120px]" />
+            <div v-if="isBalance" class="flex justify-center mt-36 mr-5 gap-4">
+                <CButton variant="gray" text="Ссылка" class="w-[150px] h-[55px]" />
+                <CButton variant="missing" text="Ещё" class="w-[150px] border border-white-100 h-[55px]" />
             </div>
         </div>
 

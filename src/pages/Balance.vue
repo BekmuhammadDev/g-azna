@@ -16,8 +16,8 @@ const userData = {
 
 <template>
   <main>
-    <div class="p-6 overflow-auto space-y-6">
-      <div class="flex justify-between">
+    <div class="p-6 overflow-auto">
+      <div class="flex justify-between mb-10">
         <BalancePageScrollbar />
         <ProfileSection :user="userData" @add-friend="handleAddFriend" />
       </div>
