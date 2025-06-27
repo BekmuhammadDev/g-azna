@@ -36,35 +36,6 @@ const router = createRouter({
     history: createWebHistory(),
     routes,
 });
-// router.beforeEach(async (to) => {
-//     const authStore = useAuthStore();
-//     const user = computed(() => authStore.user);
-//
-//     if (["404", "403", "500"].includes((to.name || "").toString())) {
-//         return true;
-//     }
-//
-//     if (JwtService.getToken() && !Object.keys(user.value)?.length) {
-//         await authStore.fetchUserData();
-//     }
-//
-//     if (Object.keys(user.value)?.length && to.name === "login") {
-//         return {name: "home"};
-//     }
-//
-//
-//     if (to.name === "PrivacyPolicy") return true;
-//
-//     if (
-//         to.name !== "login" &&
-//         !JwtService.getToken() &&
-//         !Object.keys(user.value)?.length
-//     ) {
-//         return {name: "login"};
-//     } else {
-//         return true;
-//     }
-// });
 
 
 export default router;
