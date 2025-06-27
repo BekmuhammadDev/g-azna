@@ -28,11 +28,10 @@ import { computed } from 'vue';
 
 const route = useRoute();
 const isBalance = computed(() => route.path === '/balance');
-
 </script>
 
 <template>
-    <div class="bg-gradient-to-r  from-[#305845] to-[#90b9a7] p-6 rounded-xl flex justify-between ">
+    <div class="bg-gradient-to-r  from-[#305845] to-[#90b9a7] p-6 rounded-xl justify-between  flex w-full ">
 
         <div v-if="!isBalance">
             <div class="w-[400px] mt-10">
@@ -70,11 +69,18 @@ const isBalance = computed(() => route.path === '/balance');
             </div>
         </div>
 
-        <div class="mr-24">
+        <div v-if="isBalance">
+            <select name="" id="" class=" p-1 rounded-md">
+                <option value="">Ru</option>
+                <option value="">Uz</option>
+            </select>
+        </div>
+
+        <div>
             <div class="flex items-center mb-3 justify-between">
                 <h1 class="text-[32px] font-bold text-white">Профиль</h1>
-                <div class="relative left-14 cursor-pointer">
-                    <span><i class="bi bi-heart-fill text-red-500" style="font-size: 24px;"></i></span>
+                <div class=" cursor-pointer">
+                    <span><i class="bi bi-heart-fill text-red-500 ml-40" style="font-size: 24px;"></i></span>
                 </div>
             </div>
             <div class="flex items-center gap-4">
@@ -86,22 +92,24 @@ const isBalance = computed(() => route.path === '/balance');
                     <p class="text-sm text-white-100">{{ user.email }}</p>
                 </div>
             </div>
-            <div class="mt-4 text-sm flex items-center gap-5 space-y-1">
-                <div>
-                    <p class="text-xs font-bold text-white">Подписки:</p>
-                    <p class="text-center text-white mt-2">{{ user.following }}</p>
+            <div>
+                <div class="mt-4 text-sm flex items-center gap-5 space-y-1">
+                    <div>
+                        <p class="text-xs font-bold text-white">Подписки:</p>
+                        <p class="text-center text-white mt-2">{{ user.following }}</p>
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold text-white">Наставник: </p>
+                        <p class="text-center text-white mt-2">{{ user.mentors }}</p>
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold text-white">Подписчики: </p>
+                        <p class="text-center text-white mt-2">{{ user.followers }}</p>
+                    </div>
                 </div>
-                <div>
-                    <p class="text-xs font-bold text-white">Наставник: </p>
-                    <p class="text-center text-white mt-2">{{ user.mentors }}</p>
+                <div v-if="!isBalance" class="flex justify-center mt-20 mr-24">
+                    <CButton variant="gray" text=" Добавить друга" class="w-[159px]" @click="emit('add-friend')" />
                 </div>
-                <div>
-                    <p class="text-xs font-bold text-white">Подписчики: </p>
-                    <p class="text-center text-white mt-2">{{ user.followers }}</p>
-                </div>
-            </div>
-            <div v-if="!isBalance" class="flex justify-center mt-20">
-                <CButton variant="gray" text=" Добавить друга" class="w-[159px]" @click="emit('add-friend')" />
             </div>
 
             <div v-if="isBalance" class="flex justify-center mt-36 gap-4">
@@ -109,5 +117,6 @@ const isBalance = computed(() => route.path === '/balance');
                 <CButton variant="gray" text="Ещё" class="w-[120px]" />
             </div>
         </div>
+
     </div>
 </template>
