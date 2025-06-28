@@ -20,7 +20,7 @@ const toggleDropdown = () => {
 </script>
 
 <template>
-  <div class="flex gap-6 w-[400px]">
+  <div class="flex gap-6 w-[400px] mt-14">
     <div class="bg-gradient-to-b  from-[#1b3b2b] via-[#285d44] to-[#90b9a7]  p-4 shadow-md rounded-xl w-full">
       <p class="text-center mb-3 font-bold text-white">Ваш баланс</p>
       <div class="text-3xl font-bold flex justify-center items-center text-gray-800 gap-2">
